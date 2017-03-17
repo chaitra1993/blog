@@ -1,0 +1,25 @@
+<h2>Listing of the user posts</h2>
+
+<% @posts.each do |post| %>
+	<li><h3>Question</h3><%= post.question %>
+	
+	<li><h4>Responses</h4><% if post.responses != 0 %>
+				<% post.responses.each do |response| %>
+					<%= response.answer %> - <%= response.user.email %>
+				<% end %>
+		
+		<% end %></li>
+
+			<%= form_for @response do |f| %>
+				<%= f.hidden_field :post_id, value: post.id %>
+	
+				<%= f.label :answer %>
+				<%= f.text_area :answer %>
+
+				<%= f.submit %>
+			<% end %>
+<% end %></li>
+<br>
+
+<%= link_to "Post question", new_post_path %>
+
